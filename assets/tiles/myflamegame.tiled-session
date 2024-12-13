@@ -3,19 +3,38 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "level1.tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "level1.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 240,
+                "y": 158.66666666666663
+            }
+        },
+        "level1.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "level1.tmx#Hills": {
+            "scaleInDock": 1
+        },
+        "level1.tmx#Water": {
+            "scaleInDock": 1
+        }
     },
     "last.imagePath": "/Users/tyler/prj/youtube/my_flame_game/assets/images",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
+        "level1.tmx"
     ],
     "project": "myflamegame.tiled-project",
     "recentFiles": [
+        "level1.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {

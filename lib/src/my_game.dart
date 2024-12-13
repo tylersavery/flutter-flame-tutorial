@@ -3,24 +3,20 @@ import 'dart:async';
 import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flame/sprite.dart';
 import 'package:my_flame_game/src/level.dart';
+import 'package:my_flame_game/src/player.dart';
 
 class MyGame extends FlameGame {
   MyGame();
 
-  late SpriteSheet grassSpriteSheet;
   late Level level;
   late CameraComponent cam;
+  late Player player;
 
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
-
-    grassSpriteSheet = SpriteSheet(
-      image: await images.load("Grass.png"),
-      srcSize: Vector2.all(16),
-    );
+    player = Player();
 
     _loadLevel("level1");
 
@@ -28,7 +24,7 @@ class MyGame extends FlameGame {
   }
 
   void _loadLevel(String levelName) {
-    level = Level(levelName: levelName);
+    level = Level(levelName: levelName, player: player);
 
     final windowWidth = size.x;
     final windowHeight = size.y;
@@ -47,6 +43,8 @@ class MyGame extends FlameGame {
     final x = (size.x - windowWidth) / 2;
     final y = (size.y - windowHeight) / 2;
     cam.viewport.position = Vector2(x, y);
+
+    cam.follow(player);
 
     addAll([cam, level]);
   }
