@@ -4,8 +4,14 @@ import 'package:my_flame_game/src/my_game.dart';
 
 void main() {
   runApp(
-    GameWidget(
-      game: MyGame(),
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Focus(
+        onKeyEvent: (node, event) => KeyEventResult.handled,
+        child: GameWidget(
+          game: MyGame(),
+        ),
+      ),
     ),
   );
 }

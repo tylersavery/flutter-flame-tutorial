@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:my_flame_game/src/level.dart';
 import 'package:my_flame_game/src/player.dart';
 
-class MyGame extends FlameGame {
+class MyGame extends FlameGame with HasKeyboardHandlerComponents {
   MyGame();
 
   late Level level;
