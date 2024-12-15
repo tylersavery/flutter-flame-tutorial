@@ -24,6 +24,11 @@ class MyGame extends FlameGame with HasKeyboardHandlerComponents {
     return super.onLoad();
   }
 
+  void reload() {
+    removeAll(children);
+    onLoad();
+  }
+
   void _loadLevel(String levelName) {
     level = Level(levelName: levelName, player: player);
 

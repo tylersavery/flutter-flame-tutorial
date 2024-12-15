@@ -1,8 +1,12 @@
 import 'dart:async';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/src/services/keyboard_key.g.dart';
+import 'package:my_flame_game/src/collisions/collision_block.dart';
+import 'package:my_flame_game/src/collisions/collision_utils.dart';
+import 'package:my_flame_game/src/collisions/custom_hitbox.dart';
 import 'package:my_flame_game/src/my_game.dart';
 
 enum PlayerState {
@@ -51,11 +55,25 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<MyGame>, Keyb
   double verticalMovement = 0.0;
   WalkDirection lastWalkDirection = WalkDirection.down;
 
+  CustomHitbox hitbox = const CustomHitbox(
+    offsetX: 21,
+    offsetY: 28,
+    width: 6,
+    height: 4,
+  );
+
+  List<CollisionBlock> collisionBlocks = [];
+
   @override
   FutureOr<void> onLoad() {
     startingPosition = position;
 
     _loadAllAnimations();
+
+    add(RectangleHitbox(
+      position: Vector2(hitbox.offsetX, hitbox.offsetY),
+      size: Vector2(hitbox.width, hitbox.height),
+    ));
 
     return super.onLoad();
   }
@@ -64,6 +82,8 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<MyGame>, Keyb
   void update(double dt) {
     _updatePlayerState();
     _updatePlayerPosition(dt);
+    _checkHorizontalCollisions();
+    _checkVerticalCollisions();
 
     super.update(dt);
   }
@@ -171,5 +191,37 @@ class Player extends SpriteAnimationGroupComponent with HasGameRef<MyGame>, Keyb
         textureSize: Vector2.all(48),
       ),
     );
+  }
+
+  void _checkHorizontalCollisions() {
+    for (final block in collisionBlocks) {
+      if (checkCollision(this, block)) {
+        if (velocity.x > 0) {
+          velocity.x = 0;
+          position.x = block.x - hitbox.offsetX - hitbox.width;
+          break;
+        }
+        if (velocity.x < 0) {
+          velocity.x = 0;
+          position.x = block.x + block.width - hitbox.offsetX;
+        }
+      }
+    }
+  }
+
+  void _checkVerticalCollisions() {
+    for (final block in collisionBlocks) {
+      if (checkCollision(this, block)) {
+        if (velocity.y > 0) {
+          velocity.y = 0;
+          position.y = block.y - hitbox.height - hitbox.offsetY;
+          break;
+        }
+        if (velocity.y < 0) {
+          velocity.y = 0;
+          position.y = block.y + block.height - hitbox.offsetY;
+        }
+      }
+    }
   }
 }

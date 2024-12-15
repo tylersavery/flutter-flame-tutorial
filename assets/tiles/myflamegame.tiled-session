@@ -7,12 +7,29 @@
     "expandedProjectPaths": [
     ],
     "fileStates": {
+        "/Users/tyler/prj/youtube/flame-tutorial-ref/my_flame_game/assets/tiles/Grass.tsx": {
+            "scaleInDock": 1
+        },
+        "/Users/tyler/prj/youtube/flame-tutorial-ref/my_flame_game/assets/tiles/Water.tsx": {
+            "scaleInDock": 1
+        },
+        "/Users/tyler/prj/youtube/flame-tutorial-ref/my_flame_game/assets/tiles/level1.tmx": {
+            "scale": 1.35375,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 234.533702677747,
+                "y": 154.75530932594646
+            }
+        },
+        "/Users/tyler/prj/youtube/flame-tutorial-ref/my_flame_game/assets/tiles/level1.tmx#Hills": {
+            "scaleInDock": 1
+        },
         "level1.tmx": {
             "scale": 1.5,
-            "selectedLayer": 2,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
-                "y": 158.66666666666663
+                "x": 235.33333333333334,
+                "y": 144
             }
         },
         "level1.tmx#Grass": {
@@ -34,6 +51,7 @@
     ],
     "project": "myflamegame.tiled-project",
     "recentFiles": [
+        "/Users/tyler/prj/youtube/flame-tutorial-ref/my_flame_game/assets/tiles/level1.tmx",
         "level1.tmx"
     ],
     "tileset.embedInMap": true,

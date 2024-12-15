@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
+import 'package:my_flame_game/src/collisions/collision_block.dart';
 import 'package:my_flame_game/src/my_game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:my_flame_game/src/player.dart';
@@ -15,6 +16,7 @@ class Level extends World with HasGameRef<MyGame> {
   });
 
   late TiledComponent map;
+  List<CollisionBlock> collisionBlocks = [];
 
   @override
   FutureOr<void> onLoad() async {
@@ -22,6 +24,7 @@ class Level extends World with HasGameRef<MyGame> {
 
     add(map);
     _spawnObjects();
+    _addCollisions();
 
     return super.onLoad();
   }
@@ -38,6 +41,24 @@ class Level extends World with HasGameRef<MyGame> {
             break;
         }
       }
+    }
+  }
+
+  void _addCollisions() {
+    final collidersLayer = map.tileMap.getLayer<ObjectGroup>("Colliders");
+
+    if (collidersLayer != null) {
+      for (final collider in collidersLayer.objects) {
+        final block = CollisionBlock(
+          position: Vector2(collider.x, collider.y),
+          size: Vector2(collider.width, collider.height),
+        );
+
+        collisionBlocks.add(block);
+        add(block);
+      }
+
+      player.collisionBlocks = collisionBlocks;
     }
   }
 }
